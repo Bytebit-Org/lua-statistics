@@ -147,10 +147,12 @@ end
 	@returns The minimum and maximum values as a tuple: <min, max>
 **--]]
 statistics.series.getExtremes = function (series)
-	local min = -math.huge
-	local max = math.huge
+	assert(#series > 0, "Cannot find extremes on an empty list")
+	
+	local min = series[1]
+	local max = series[1]
 
-	for i = 1, #series do
+	for i = 2, #series do
 		min = math.min(series[i], min)
 		max = math.max(series[i], max)
 	end
