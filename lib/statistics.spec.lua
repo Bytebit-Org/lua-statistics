@@ -12,7 +12,7 @@ return function()
 		expect(statistics.series.median(odd)).to.equal(3)
 		expect(statistics.series.median(even)).to.equal(2.5)
 		expect(statistics.series.mode(even)).to.equal(1)
-		expect(statistics.series.standardDeviation(odd)).to.be.near(1.5811388300842)
+		expect(statistics.series.standardDeviation(odd)).to.be.near(1.414213562)
 
 		local min, max = statistics.series.getExtremes(odd)
 		expect(min).to.equal(1)
