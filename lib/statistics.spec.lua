@@ -1,5 +1,6 @@
 return function()
 	local statistics = require(script.Parent.statistics)
+	local generatedSeriesLength = 100000
 
 	it("should give accurate statistical measures", function()
 		local odd = { 1, 2, 3, 4, 5 } -- Odd length series
@@ -24,20 +25,69 @@ return function()
 		expect(generatedSeries[1]).to.equal(1)
 	end)
 	
-	local seriesLength = 100000
-	it("should give approximate distributions", function()
+	it("should give approximate normal distributions", function()
 		local standardNormalSeries = statistics.series.generate(
-			seriesLength,
+			generatedSeriesLength,
 			statistics.distributions.standardNormal
 		)
 		expect(statistics.series.mean(standardNormalSeries)).to.be.near(0, 0.01)
 		expect(statistics.series.standardDeviation(standardNormalSeries)).to.be.near(1, 0.01)
 		
 		local nonStandardNormalSeries = statistics.series.generate(
-			seriesLength,
+			generatedSeriesLength,
 			statistics.distributions.normal, 1, 1
 		)
 		expect(statistics.series.mean(standardNormalSeries)).to.be.near(1, 0.01)
 		expect(statistics.series.standardDeviation(standardNormalSeries)).to.be.near(1, 0.01)
+	end)
+
+	it("should give approximate exponential distributions", function()
+		local lambda = 2
+
+		local exponentialSeries = statistics.series.generate(
+			generatedSeriesLength,
+			statistics.distributions.exponential,
+			lambda
+		)
+		expect(statistics.series.mean(exponentialSeries)).to.be.near(1 / lambda, 0.01)
+		expect(statistics.series.variance(exponentialSeries)).to.be.near(1 / (lambda * lambda), 0.01)
+	end)
+
+	it("should give approximate binomial distributions", function()
+		-- This will inherently also test the bernoulli distribution
+
+		local n = 100
+		local p = 0.5
+
+		local binomalSeries = statistics.series.generate(
+			generatedSeriesLength,
+			statistics.distributions.binomial,
+			n,
+			p
+		)
+		expect(statistics.series.mean(binomalSeries)).to.be.near(n * p, 0.01)
+		expect(statistics.series.variance(binomalSeries)).to.be.near(n * p * (1 - p), 0.01)
+	end)
+
+	it("should give approximate standard discrete distributions", function()
+		local standardDiscreteSeries = statistics.series.generate(
+			generatedSeriesLength,
+			statistics.distributions.standardDiscrete,
+			{0.01, 0.99},
+			{0, 1}
+		)
+		expect(statistics.series.mean(exponentialSeries)).to.be.near(1, 0.01)
+	end)
+
+	it("should give approximate geometric distributions", function()
+		local p = 0.5
+
+		local standardDiscreteSeries = statistics.series.generate(
+			generatedSeriesLength,
+			statistics.distributions.geometric,
+			p
+		)
+		expect(statistics.series.mean(exponentialSeries)).to.be.near((1 - p) / p, 0.01)
+		expect(statistics.series.variance(exponentialSeries)).to.be.near((1 - p) / (p * p), 0.01)
 	end)
 end

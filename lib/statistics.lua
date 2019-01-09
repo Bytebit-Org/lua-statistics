@@ -13,6 +13,8 @@ local statistics = {}
 -- SERIES FUNCTIONS
 statistics.series = {}
 
+--[[ CONTINUOUS DISTRIBUTIONS ]]--
+
 --[[**
 	Given a series of numbers, this will calculate the sum
 
@@ -64,12 +66,13 @@ statistics.series.median = function (series)
 end
 
 --[[**
-	Given a series of numbers, this will find the mode
-	If there is a tie, then all the numbers that tied will be returned as a sorted array.
+	Given a series of values, this will find the mode
+	If there is a tie, then all the values that tied will be returned as a sorted array.
+	Note that this function will work regardless of data type; The data types just need to be sortable in some way and have a method of equality
 
 	Runs in O(n lg(n)) time with O(n) space
 
-	@param series An array of numbers
+	@param series An array of values
 
 	@returns If there was a tie, then a sorted array; otherwise a number
 **--]]
@@ -107,13 +110,13 @@ statistics.series.mode = function (series)
 end
 
 --[[**
-	Given a series of numbers, this will find the standard deviation
+	Given a series of numbers, this will find the variance
 
 	@param series An array of numbers
 
 	@returns A number
 **--]]
-statistics.series.standardDeviation = function (series)
+statistics.series.variance = function (series)
 	local mean = statistics.series.mean(series)
 	local varianceSum = 0
 
@@ -122,7 +125,18 @@ statistics.series.standardDeviation = function (series)
 		varianceSum = varianceSum + (difference * difference)
 	end
 
-	return varianceSum / (#series - 1)
+	return varianceSum / #series
+end
+
+--[[**
+	Given a series of numbers, this will find the standard deviation
+
+	@param series An array of numbers
+
+	@returns A number
+**--]]
+statistics.series.standardDeviation = function (series)
+	return math.sqrt(statistics.series.variance(series))
 end
 
 --[[**
@@ -192,6 +206,89 @@ end
 **--]]
 statistics.distributions.normal = function (mean, variance)
 	return statistics.distributions.standardNormal() * math.sqrt(variance) + mean
+end
+
+--[[**
+	Samples from an exponential distribution with a given rate
+
+	@param rate The rate for the distribution
+
+	@returns A number sampled from the defined distribution
+**--]]
+statistics.distributions.exponential = function (rate)
+	return -math.log(1 - math.random()) / rate
+end
+
+--[[ DISCRETE DISTRIBUTIONS ]]--
+
+--[[**
+	Samples from a bernoulli distribution with given probability
+
+	@param successProbability The probability of obtaining a 1
+
+	@returns A 0 or a 1, according to the distribution
+**--]]
+statistics.distributions.bernoulli = function (successProbability)
+	if math.random() >= successProbability then
+		return 1
+	else
+		return 0
+	end
+end
+
+--[[**
+	Samples from a binomial distribution with given probability and number of trials
+
+	@param numberOfTrials The number of trials for the distribution
+	@param successProbability The probability of a success on any given trial
+
+	@returns A non-negative integer in the range [0, numberOfTrials], according to the defined distribution
+**--]]
+statistics.distributions.binomial = function (numberOfTrials, successProbability)
+	local successCount = 0
+
+	for i = 1, numberOfTrials do
+		successCount = successCount + statistics.distributions.bernoulli(successProbability)
+	end
+
+	return successCount
+end
+
+--[[**
+	Samples from a given discrete distribution
+
+	@param distribution An array of numbers that should sum to 1
+	@param values An array of values of the same length as distribution
+
+	@returns A value sampled according to the given distribution
+**--]]
+statistics.distributions.standardDiscrete = function (distribution, values)
+	assert(#distribution == #values, "Distribution and values array lengths do not match")
+
+	local r = math.random()
+	local pSum = 0
+	
+	for i = 1, #distribution do
+		pSum = pSum + distribution[i]
+		if pSum >= r then
+			return values[i]
+		end
+	end
+
+	--Just in case
+	return distribution[#distribution]
+end
+
+--[[**
+	Samples from a geometric distribution with given success probability
+	Note that this implementation allows for 0
+
+	@param successProbability The success probability parameter for the distribution
+
+	@returns A non-negative integer sampled from the defined distribution
+**--]]
+statistics.distributions.geometric = function (successProbability)
+	return math.floor(math.log(math.random()) / math.log(1 - successProbability))
 end
 
 return statistics

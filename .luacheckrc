@@ -11,6 +11,7 @@ globals = {
 	-- table library
 	"table.sort",
 
+	-- test functions
 	"it", "expect",
 }
 
