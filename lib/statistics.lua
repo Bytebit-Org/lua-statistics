@@ -1,6 +1,6 @@
-local Statistics = {}
+local statistics = {}
 
-Statistics.Distribution = {}
+statistics.distribution = {}
 
 --[[**
 	Samples from a standard normal distribution (mean = 0, variance = 1)
@@ -8,7 +8,7 @@ Statistics.Distribution = {}
 	
 	@returns A number sampled from the defined distribution
 **--]]
-Statistics.Distributions.StandardNormal = function ()
+statistics.distributions.standardNormal = function ()
 	local logPiece = math.sqrt(-2 * math.log(math.random()))
 	local cosPiece = math.cos(2 * math.pi * math.random())
 	return logPiece + cosPiece
@@ -22,8 +22,8 @@ end
 	
 	@returns A number sampled from the defined distribution
 **--]]
-Statistics.Distributions.Normal = function (mean, variance)
-	return Statistics.Distributions.StandardNormal() * variance + mean
+statistics.distributions.normal = function (mean, variance)
+	return statistics.distributions.standardNormal() * variance + mean
 end
 
-return Statistics
+return statistics
