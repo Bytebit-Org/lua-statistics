@@ -122,9 +122,13 @@ statistics.distributions = {}
 	@returns A number sampled from the defined distribution
 **--]]
 statistics.distributions.standardNormal = function ()
-	local logPiece = math.sqrt(-2 * math.log(math.random()))
-	local cosPiece = math.cos(2 * math.pi * math.random())
-	return logPiece + cosPiece
+    local u1, u2
+    repeat u1 = math.random() u2 = math.random() until u1 > 0.0001
+
+	local logPiece = math.sqrt(-2 * math.log(u1))
+    local cosPiece = math.cos(2 * math.pi * u2)
+    
+	return logPiece * cosPiece
 end
 
 --[[**
@@ -136,7 +140,7 @@ end
 	@returns A number sampled from the defined distribution
 **--]]
 statistics.distributions.normal = function (mean, variance)
-	return statistics.distributions.standardNormal() * variance + mean
+	return statistics.distributions.standardNormal() * math.sqrt(variance) + mean
 end
 
 return statistics

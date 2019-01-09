@@ -23,20 +23,20 @@ return function()
         expect(generatedSeries[1]).to.equal(1)
     end)
     
-    local seriesLength = 2500
+    local seriesLength = 100000
     it("should give approximate distributions", function()
         local standardNormalSeries = statistics.series.generate(
             seriesLength,
             statistics.distributions.standardNormal
         )
-		expect(statistics.series.mean(standardNormalSeries)).to.be.near(0)
-        expect(statistics.series.standardDeviation(standardNormalSeries)).to.be.near(1)
+		expect(statistics.series.mean(standardNormalSeries)).to.be.near(0, 0.01)
+        expect(statistics.series.standardDeviation(standardNormalSeries)).to.be.near(1, 0.01)
         
         local nonStandardNormalSeries = statistics.series.generate(
             seriesLength,
             statistics.distributions.normal, 1, 1
         )
-		expect(statistics.series.mean(standardNormalSeries)).to.be.near(1)
-		expect(statistics.series.standardDeviation(standardNormalSeries)).to.be.near(1)
+		expect(statistics.series.mean(standardNormalSeries)).to.be.near(1, 0.01)
+		expect(statistics.series.standardDeviation(standardNormalSeries)).to.be.near(1, 0.01)
 	end)
 end
