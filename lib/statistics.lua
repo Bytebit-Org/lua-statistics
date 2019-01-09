@@ -1,4 +1,12 @@
-local unpack = unpack or table.unpack
+local function shallowCopyArray(array)
+	local copy = {}
+	
+	for i = 1, #array do
+		copy[i] = array[i]
+	end
+	
+	return copy
+end
 
 local statistics = {}
 
@@ -36,6 +44,8 @@ end
 --[[**
     Given a series of numbers, this will find the median
 
+    Runs in O(n lg(n)) time with O(n) space
+
     @param series An array of numbers
 
     @returns A number
@@ -43,15 +53,56 @@ end
 statistics.series.median = function (series)
     local seriesLength = #series
 
-    if seriesLength == 0 then return 0 end
-
-    local temp = {unpack(series)}
+    local temp = shallowCopyArray(series)
     table.sort(temp)
 
     if seriesLength % 2 == 0 then
         return (temp[seriesLength / 2] + temp[seriesLength / 2 + 1]) / 2
     else
         return temp[math.ceil(seriesLength / 2)]
+    end
+end
+
+--[[**
+    Given a series of numbers, this will find the mode
+    If there is a tie, then all the numbers that tied will be returned as a sorted array.
+
+    Runs in O(n lg(n)) time with O(n) space
+
+    @param series An array of numbers
+
+    @returns If there was a tie, then a sorted array; otherwise a number
+**--]]
+statistics.series.mode = function (series)
+    local temp = shallowCopyArray(series)
+    table.sort(temp)
+
+    local actualModes = { temp[1] }
+    local actualModeCount = 1
+
+    local currentValue = temp[1]
+    local currentValueCount = 1
+
+    for i = 2, #temp do
+        if temp[i] == currentValue then
+            currentValueCount = currentValueCount + 1
+        else
+            currentValue = temp[i]
+            currentValueCount = 1
+        end
+
+        if currentValueCount == actualModeCount then
+            table.insert(actualModes, currentValue)
+        elseif currentValueCount > actualModeCount then
+            actualModes = { currentValue }
+            actualModeCount = currentValueCount
+        end
+    end
+
+    if #actualModes == 1 then
+        return actualModes[1]
+    else
+        return actualModes
     end
 end
 

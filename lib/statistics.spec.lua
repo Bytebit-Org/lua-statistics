@@ -3,12 +3,13 @@ return function()
 
     it("should give accurate statistical measures", function()
         local odd = { 1, 2, 3, 4, 5 } -- Odd length series
-        local even = { 1, 2, 3, 4, 5, 6 } -- Even length series
+        local even = { 1, 1, 2, 3, 4, 5 } -- Even length series
 
         expect(statistics.series.sum(odd)).to.equal(15)
         expect(statistics.series.mean(odd)).to.equal(3)
         expect(statistics.series.median(odd)).to.equal(3)
-        expect(statistics.series.median(even)).to.equal(3.5)
+        expect(statistics.series.median(even)).to.equal(3)
+        expect(statistics.series.mode(even)).to.equal(1)
         expect(statistics.series.standardDeviation(odd)).to.be.near(1.5811388300842)
 
         local min, max = statistics.series.getExtremes(odd)
