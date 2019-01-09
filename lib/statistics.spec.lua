@@ -18,7 +18,7 @@ return function()
 		expect(max).to.equal(5)
 	end)
 
-	it("should generate series properly", fucntion()
+	it("should generate series properly", function()
 		local generatedSeries = statistics.series.generate(5, function() return 1 end)
 
 		expect(#generatedSeries).to.equal(5)
