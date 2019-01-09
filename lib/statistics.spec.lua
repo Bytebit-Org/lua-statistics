@@ -10,7 +10,7 @@ return function()
 		expect(statistics.series.sum(odd)).to.equal(15)
 		expect(statistics.series.mean(odd)).to.equal(3)
 		expect(statistics.series.median(odd)).to.equal(3)
-		expect(statistics.series.median(even)).to.equal(3)
+		expect(statistics.series.median(even)).to.equal(2.5)
 		expect(statistics.series.mode(even)).to.equal(1)
 		expect(statistics.series.standardDeviation(odd)).to.be.near(1.5811388300842)
 
