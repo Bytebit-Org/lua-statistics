@@ -1,5 +1,8 @@
 -- luacheck: ignore
 globals = {
+	-- global variables
+	"script",
+	
 	-- global functions
 	"unpack",
 

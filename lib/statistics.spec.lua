@@ -37,8 +37,8 @@ return function()
 			generatedSeriesLength,
 			statistics.distributions.normal, 1, 1
 		)
-		expect(statistics.series.mean(standardNormalSeries)).to.be.near(1, 0.01)
-		expect(statistics.series.standardDeviation(standardNormalSeries)).to.be.near(1, 0.01)
+		expect(statistics.series.mean(nonStandardNormalSeries)).to.be.near(1, 0.01)
+		expect(statistics.series.standardDeviation(nonStandardNormalSeries)).to.be.near(1, 0.01)
 	end)
 
 	it("should give approximate exponential distributions", function()
@@ -76,13 +76,13 @@ return function()
 			{0.01, 0.99},
 			{0, 1}
 		)
-		expect(statistics.series.mean(exponentialSeries)).to.be.near(1, 0.01)
+		expect(statistics.series.mean(standardDiscreteSeries)).to.be.near(1, 0.01)
 	end)
 
 	it("should give approximate geometric distributions", function()
 		local p = 0.5
 
-		local standardDiscreteSeries = statistics.series.generate(
+		local exponentialSeries = statistics.series.generate(
 			generatedSeriesLength,
 			statistics.distributions.geometric,
 			p

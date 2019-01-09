@@ -247,7 +247,7 @@ end
 statistics.distributions.binomial = function (numberOfTrials, successProbability)
 	local successCount = 0
 
-	for i = 1, numberOfTrials do
+	for _ = 1, numberOfTrials do
 		successCount = successCount + statistics.distributions.bernoulli(successProbability)
 	end
 
