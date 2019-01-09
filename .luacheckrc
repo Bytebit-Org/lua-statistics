@@ -6,7 +6,7 @@ globals = {
 	-- math library
 	"math.random", "math.sqrt", "math.log", 
 	"math.cos", "math.min", "math.max",
-	"math.ceil", "math.pi", "math.huge"
+	"math.ceil", "math.pi", "math.huge",
 
 	-- table library
 	"table.sort",
