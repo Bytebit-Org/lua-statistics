@@ -1,10 +1,10 @@
 local function shallowCopyArray(array)
 	local copy = {}
-	
+
 	for i = 1, #array do
 		copy[i] = array[i]
 	end
-	
+
 	return copy
 end
 
@@ -148,7 +148,7 @@ end
 **--]]
 statistics.series.getExtremes = function (series)
 	assert(#series > 0, "Cannot find extremes on an empty list")
-	
+
 	local min = series[1]
 	local max = series[1]
 
@@ -185,7 +185,7 @@ statistics.distributions = {}
 --[[**
 	Samples from a standard normal distribution (mean = 0, variance = 1)
 	Implementation is based on the Box-Muller (1958) transformation
-	
+
 	@returns A number sampled from the defined distribution
 **--]]
 statistics.distributions.standardNormal = function ()
@@ -194,16 +194,16 @@ statistics.distributions.standardNormal = function ()
 
 	local logPiece = math.sqrt(-2 * math.log(u1))
 	local cosPiece = math.cos(2 * math.pi * u2)
-	
+
 	return logPiece * cosPiece
 end
 
 --[[**
 	Samples from a normal distribution with a given mean and variance
-	
+
 	@param mean The mean for the distribution
 	@param variance The variance for the distribution
-	
+
 	@returns A number sampled from the defined distribution
 **--]]
 statistics.distributions.normal = function (mean, variance)
@@ -269,7 +269,7 @@ statistics.distributions.standardDiscrete = function (distribution, values)
 
 	local r = math.random()
 	local pSum = 0
-	
+
 	for i = 1, #distribution do
 		pSum = pSum + distribution[i]
 		if pSum >= r then

@@ -25,7 +25,7 @@ return function()
 		expect(#generatedSeries).to.equal(5)
 		expect(generatedSeries[1]).to.equal(1)
 	end)
-	
+
 	it("should give approximate normal distributions", function()
 		local standardNormalSeries = statistics.series.generate(
 			generatedSeriesLength,
@@ -33,7 +33,7 @@ return function()
 		)
 		expect(statistics.series.mean(standardNormalSeries)).to.be.near(0, epsilon)
 		expect(statistics.series.standardDeviation(standardNormalSeries)).to.be.near(1, epsilon)
-		
+
 		local nonStandardNormalSeries = statistics.series.generate(
 			generatedSeriesLength,
 			statistics.distributions.normal, 1, 1
