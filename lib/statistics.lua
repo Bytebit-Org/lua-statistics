@@ -10,10 +10,8 @@ end
 
 local statistics = {}
 
--- SERIES FUNCTIONS
+--[[ SERIES FUNCTIONS ]]--
 statistics.series = {}
-
---[[ CONTINUOUS DISTRIBUTIONS ]]--
 
 --[[**
 	Given a series of numbers, this will calculate the sum
@@ -46,8 +44,8 @@ end
 --[[**
 	Given a series of numbers, this will find the median
 
-	@runtime O(n lg(n)) 
-	@memory O(n) space
+	@complexity Time O(n lg(n)) 
+	@complexity Memory O(n)
 
 	@param [t:array<number>] series An array of numbers
 
@@ -71,8 +69,8 @@ end
 	If there is a tie, then all the values that tied will be returned as a sorted array.
 	Note that this function will work regardless of data type; The data types just need to be sortable in some way and have a method of equality
 
-	@runtime O(n lg(n))
-	@memory O(n) space
+	@complexity Time O(n lg(n)) 
+	@complexity Memory O(n)
 
 	@param [t:array<any>] series An array of values
 
@@ -181,8 +179,10 @@ statistics.series.generate = function (seriesLength, samplingFunction, ...)
 	return series
 end
 
--- DISTRIBUTIONS
+--[[ DISTRIBUTION FUNCTIONS ]]--
 statistics.distributions = {}
+
+--[[ Continuous Distributions ]]--
 
 --[[**
 	Samples from a standard normal distribution (mean = 0, variance = 1)
@@ -223,7 +223,7 @@ statistics.distributions.exponential = function (rate)
 	return -math.log(1 - math.random()) / rate
 end
 
---[[ DISCRETE DISTRIBUTIONS ]]--
+--[[ Discrete Distributions ]]--
 
 --[[**
 	Samples from a bernoulli distribution with given probability
