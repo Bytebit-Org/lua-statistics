@@ -44,7 +44,7 @@ end
 --[[**
 	Given a series of numbers, this will find the median
 
-	@complexity Time O(n lg(n)) 
+	@complexity Time O(n lg(n))
 	@complexity Memory O(n)
 
 	@param [t:array<number>] series An array of numbers
@@ -69,7 +69,7 @@ end
 	If there is a tie, then all the values that tied will be returned as a sorted array.
 	Note that this function will work regardless of data type; The data types just need to be sortable in some way and have a method of equality
 
-	@complexity Time O(n lg(n)) 
+	@complexity Time O(n lg(n))
 	@complexity Memory O(n)
 
 	@param [t:array<any>] series An array of values
