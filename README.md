@@ -1,4 +1,5 @@
-# Lua Statistics
+Lua Statistics
+===
 
 <div align="center">
 	<a href="https://travis-ci.org/noahwillcrow/lua-statistics">
@@ -9,7 +10,7 @@
 A simple script to implement statistical functions not provided by the Lua standard API, developed especially for use on Roblox
 
 Documentation
-===
+---
 
 ### Series Functions
 
