@@ -18,9 +18,9 @@ statistics.series = {}
 --[[**
 	Given a series of numbers, this will calculate the sum
 
-	@param series An array of numbers
+	@param [t:array<number>] series An array of numbers
 
-	@returns A number
+	@returns [t:number] A number
 **--]]
 statistics.series.sum = function (series)
 	local sum = 0
@@ -35,9 +35,9 @@ end
 --[[**
 	Given a series of numbers, this will calculate the mean
 
-	@param series An array of numbers
+	@param [t:array<number>] series An array of numbers
 
-	@returns A number
+	@returns [t:number] A number
 **--]]
 statistics.series.mean = function (series)
 	return statistics.series.sum(series) / #series
@@ -46,11 +46,12 @@ end
 --[[**
 	Given a series of numbers, this will find the median
 
-	Runs in O(n lg(n)) time with O(n) space
+	@runtime O(n lg(n)) 
+	@memory O(n) space
 
-	@param series An array of numbers
+	@param [t:array<number>] series An array of numbers
 
-	@returns A number
+	@returns [t:number] A number
 **--]]
 statistics.series.median = function (series)
 	local seriesLength = #series
@@ -70,11 +71,12 @@ end
 	If there is a tie, then all the values that tied will be returned as a sorted array.
 	Note that this function will work regardless of data type; The data types just need to be sortable in some way and have a method of equality
 
-	Runs in O(n lg(n)) time with O(n) space
+	@runtime O(n lg(n))
+	@memory O(n) space
 
-	@param series An array of values
+	@param [t:array<any>] series An array of values
 
-	@returns If there was a tie, then a sorted array; otherwise a number
+	@returns [t:any] If there was a tie, then a sorted array; otherwise a number
 **--]]
 statistics.series.mode = function (series)
 	local temp = shallowCopyArray(series)
@@ -112,9 +114,9 @@ end
 --[[**
 	Given a series of numbers, this will find the variance
 
-	@param series An array of numbers
+	@param [t:array<number>] series An array of numbers
 
-	@returns A number
+	@returns [t:number] A number
 **--]]
 statistics.series.variance = function (series)
 	local mean = statistics.series.mean(series)
@@ -131,9 +133,9 @@ end
 --[[**
 	Given a series of numbers, this will find the standard deviation
 
-	@param series An array of numbers
+	@param [t:array<number>] series An array of numbers
 
-	@returns A number
+	@returns [t:number] A number
 **--]]
 statistics.series.standardDeviation = function (series)
 	return math.sqrt(statistics.series.variance(series))
@@ -142,9 +144,9 @@ end
 --[[**
 	Given a series of numbers, this will find the minimum and maximum values
 
-	@param series An array of numbers
+	@param [t:array<number>] series An array of numbers
 
-	@returns The minimum and maximum values as a tuple: <min, max>
+	@returns [t:tuple<number, number>] The minimum and maximum values as a tuple: <min, max>
 **--]]
 statistics.series.getExtremes = function (series)
 	assert(#series > 0, "Cannot find extremes on an empty list")
@@ -163,11 +165,11 @@ end
 --[[**
 	Generates a series of numbers pulled from a particular sampling distribution
 
-	@param seriesLength The length of the series to generate
-	@param samplingFunction The sampling function to use
-	@param ... Any arguments needed for the sampling function
+	@param [t:number] seriesLength The length of the series to generate
+	@param [t:function] samplingFunction The sampling function to use
+	@param [t:any] ... Any arguments needed for the sampling function
 
-	@returns An array of numbers
+	@returns [t:array<number>] An array of numbers
 **--]]
 statistics.series.generate = function (seriesLength, samplingFunction, ...)
 	local series = {}
@@ -186,7 +188,7 @@ statistics.distributions = {}
 	Samples from a standard normal distribution (mean = 0, variance = 1)
 	Implementation is based on the Box-Muller (1958) transformation
 
-	@returns A number sampled from the defined distribution
+	@returns [t:number] A number sampled from the defined distribution
 **--]]
 statistics.distributions.standardNormal = function ()
 	local u1, u2
@@ -201,10 +203,10 @@ end
 --[[**
 	Samples from a normal distribution with a given mean and variance
 
-	@param mean The mean for the distribution
-	@param variance The variance for the distribution
+	@param [t:number] mean The mean for the distribution
+	@param [t:number] variance The variance for the distribution
 
-	@returns A number sampled from the defined distribution
+	@returns [t:number] A number sampled from the defined distribution
 **--]]
 statistics.distributions.normal = function (mean, variance)
 	return statistics.distributions.standardNormal() * math.sqrt(variance) + mean
@@ -213,9 +215,9 @@ end
 --[[**
 	Samples from an exponential distribution with a given rate
 
-	@param rate The rate for the distribution
+	@param [t:number] rate The rate for the distribution
 
-	@returns A number sampled from the defined distribution
+	@returns [t:number] A number sampled from the defined distribution
 **--]]
 statistics.distributions.exponential = function (rate)
 	return -math.log(1 - math.random()) / rate
@@ -226,9 +228,9 @@ end
 --[[**
 	Samples from a bernoulli distribution with given probability
 
-	@param successProbability The probability of obtaining a 1
+	@param [t:number] successProbability The probability of obtaining a 1
 
-	@returns A 0 or a 1, according to the distribution
+	@returns [t:number] A 0 or a 1, according to the distribution
 **--]]
 statistics.distributions.bernoulli = function (successProbability)
 	if math.random() >= successProbability then
@@ -241,10 +243,10 @@ end
 --[[**
 	Samples from a binomial distribution with given probability and number of trials
 
-	@param numberOfTrials The number of trials for the distribution
-	@param successProbability The probability of a success on any given trial
+	@param [t:number] numberOfTrials The number of trials for the distribution
+	@param [t:number] successProbability The probability of a success on any given trial
 
-	@returns A non-negative integer in the range [0, numberOfTrials], according to the defined distribution
+	@returns [t:number] A non-negative integer in the range [0, numberOfTrials], according to the defined distribution
 **--]]
 statistics.distributions.binomial = function (numberOfTrials, successProbability)
 	local successCount = 0
@@ -259,10 +261,10 @@ end
 --[[**
 	Samples from a given discrete distribution
 
-	@param distribution An array of numbers that should sum to 1
-	@param values An array of values of the same length as distribution
+	@param [t:array<number>] distribution An array of numbers that should sum to 1
+	@param [t:array<any>] values An array of values of the same length as distribution
 
-	@returns A value sampled according to the given distribution
+	@returns [t:any] A value sampled according to the given distribution
 **--]]
 statistics.distributions.standardDiscrete = function (distribution, values)
 	assert(#distribution == #values, "Distribution and values array lengths do not match")
@@ -285,9 +287,9 @@ end
 	Samples from a geometric distribution with given success probability
 	Note that this implementation allows for 0
 
-	@param successProbability The success probability parameter for the distribution
+	@param [t:number] successProbability The success probability parameter for the distribution
 
-	@returns A non-negative integer sampled from the defined distribution
+	@returns [t:number] A non-negative integer sampled from the defined distribution
 **--]]
 statistics.distributions.geometric = function (successProbability)
 	return math.floor(math.log(math.random()) / math.log(1 - successProbability))
