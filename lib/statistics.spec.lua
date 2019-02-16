@@ -87,7 +87,7 @@ return function()
 		)
 		expect(statistics.series.mean(standardDiscreteSeries)).to.be.near(1, epsilon)
 
-		expect(statistics.distributions.standardDiscrete({0, 0}, {1, 2})).to.equal(2)
+		expect(statistics.distributions.standardDiscrete({-0.1, -0.1}, {1, 2})).to.equal(2)
 	end)
 
 	it("should give approximate geometric distributions", function()

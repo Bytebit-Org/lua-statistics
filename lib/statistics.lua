@@ -280,7 +280,7 @@ statistics.distributions.standardDiscrete = function (distribution, values)
 	end
 
 	--Just in case
-	return distribution[#distribution]
+	return values[#values]
 end
 
 --[[**
