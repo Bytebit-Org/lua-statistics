@@ -2,8 +2,8 @@ Lua Statistics
 ===
 
 <div align="center">
-	<a href="https://travis-ci.org/noahwillcrow/lua-statistics">
-		<img src="https://api.travis-ci.org/noahwillcrow/lua-statistics.svg?branch=master" alt="Travis-CI Build Status" />
+	<a href="https://travis-ci.org/Bytebit-Org/lua-statistics">
+		<img src="https://api.travis-ci.org/Bytebit-Org/lua-statistics.svg?branch=master" alt="Travis-CI Build Status" />
 	</a>
 </div>
 
