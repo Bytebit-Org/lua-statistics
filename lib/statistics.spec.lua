@@ -14,6 +14,14 @@ return function()
 		expect(statistics.series.mode(even)).to.equal(1)
 		expect(statistics.series.standardDeviation(odd)).to.be.near(1.414213562)
 
+		-- Check that the mode function can return multiple values
+		do
+			local mode = statistics.series.mode({1, 1, 2, 2})
+			expect(#mode).to.equal(2)
+			expect(mode[1]).to.equal(1)
+			expect(mode[2]).to.equal(2)
+		end
+
 		local min, max = statistics.series.getExtremes(odd)
 		expect(min).to.equal(1)
 		expect(max).to.equal(5)
@@ -78,6 +86,8 @@ return function()
 			{0, 1}
 		)
 		expect(statistics.series.mean(standardDiscreteSeries)).to.be.near(1, epsilon)
+
+		expect(statistics.distributions.standardDiscrete({1, 0.1}, {1, 2})).to.equal(2)
 	end)
 
 	it("should give approximate geometric distributions", function()
