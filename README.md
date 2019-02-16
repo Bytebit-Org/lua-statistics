@@ -5,6 +5,9 @@ Lua Statistics
 	<a href="https://travis-ci.org/Bytebit-Org/lua-statistics">
 		<img src="https://api.travis-ci.org/Bytebit-Org/lua-statistics.svg?branch=master" alt="Travis-CI Build Status" />
 	</a>
+	<a href='https://coveralls.io/github/Bytebit-Org/lua-statistics?branch=master'>
+		<img src='https://coveralls.io/repos/github/Bytebit-Org/lua-statistics/badge.svg?branch=master' alt='Coverage Status' />
+	</a>
 </div>
 
 A simple script to implement statistical functions not provided by the Lua standard API, developed especially for use on Roblox
