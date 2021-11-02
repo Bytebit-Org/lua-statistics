@@ -1,14 +1,18 @@
 # Lua Statistics
-===
-
-<div align="center">
-	<a href="https://travis-ci.org/Bytebit-Org/lua-statistics">
-		<img src="https://api.travis-ci.org/Bytebit-Org/lua-statistics.svg?branch=master" alt="Travis-CI Build Status" />
+<p align="center">
+	<a href="https://github.com/Bytebit-Org/lua-statistics/actions">
+        <img src="https://github.com/Bytebit-Org/lua-statistics/workflows/CI/badge.svg" alt="CI status" />
+    </a>
+	<a href="http://makeapullrequest.com">
+		<img src="https://img.shields.io/badge/PRs-welcome-blue.svg" alt="PRs Welcome" />
 	</a>
-	<a href='https://coveralls.io/github/Bytebit-Org/lua-statistics?branch=master'>
-		<img src='https://coveralls.io/repos/github/Bytebit-Org/lua-statistics/badge.svg?branch=master' alt='Coverage Status' />
+	<a href="https://opensource.org/licenses/MIT">
+		<img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" />
 	</a>
-</div>
+	<a href="https://discord.gg/QEz3v8y">
+		<img src="https://img.shields.io/badge/discord-join-7289DA.svg?logo=discord&longCache=true&style=flat" alt="Discord server" />
+	</a>
+</p>
 
 A simple script to implement statistical functions not provided by the Lua standard API, developed especially for use on Roblox
 
