@@ -4,7 +4,7 @@ registry = "test"
 
 [[package]]
 name = "bytebit/statistics"
-version = "0.0.1"
+version = "1.0.0"
 dependencies = [["testez", "roblox/testez@0.4.1"]]
 
 [[package]]
