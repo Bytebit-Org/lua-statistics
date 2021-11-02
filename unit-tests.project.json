@@ -1,0 +1,34 @@
+{
+	"name": "unit-tests",
+	"globIgnorePaths": [
+		"**/package.json",
+		"**/tsconfig.json",
+		"**/*.project.json",
+		"**/.editorconfig",
+		"**/.git*",
+		"**/.vscode",
+		"**/*.md",
+		"**/*.toml",
+		"**/*.yaml",
+		"**/*.yml",
+		"**/*.lock"
+	],
+	"tree": {
+		"$className": "DataModel",
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"wally_packages": {
+				"$path": "Packages"
+			},
+			"src": {
+				"$path": "./src"
+			}
+		},
+		"ServerScriptService": {
+			"$className": "ServerScriptService",
+			"TestRunner": {
+				"$path": "./spec.server.lua"
+			}
+		}
+	}
+}
