@@ -1,4 +1,4 @@
-Lua Statistics
+# Lua Statistics
 ===
 
 <div align="center">
@@ -12,7 +12,22 @@ Lua Statistics
 
 A simple script to implement statistical functions not provided by the Lua standard API, developed especially for use on Roblox
 
-Documentation
+## Installation
+### Wally
+[Wally](https://github.com/UpliftGames/wally/) users can install this package by adding the following line to their `Wally.toml` under `[dependencies]`:
+```
+statistics = "bytebit/statistics@0.0.1"
+```
+
+Then just run `wally install`.
+
+### From model file
+Model files are uploaded to every release as `.rbxmx` files. You can download the file from the [Releases page](https://github.com/Bytebit-Org/lua-statistics/releases) and load it into your project however you see fit.
+
+### From model asset
+New versions of the asset are uploaded with every release. The asset can be added to your Roblox Inventory and then inserted into your Place via Toolbox by getting it [here.](https://www.roblox.com/library/7881853854/statistics-Package)
+
+## Documentation
 ---
 
 ### Series Functions
